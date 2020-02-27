@@ -14,25 +14,9 @@ use App\Models\Posts;
 
 Route ::get('/','Homecontroller@index');
 Route ::get('/admin','Postcontroller@index');
-Route::get('hello', function () {
-    $posts = factory(Posts::class, 10)->make();
-    return view('hello', [
-        'posts' => $posts
-    ]);
+Route::resource('posts','PostController');
+Route::resource('users','UserController');
 
-});
-Route::group([
-    'prefix' => 'posts',
-    'as' => 'post.',
-], function () {
-    Route::get('create', function () {
-        dd("Hello");
-    })->name('create');
-    Route::get('show', function () {
-        $posts = factory(Posts::class, 10)->make();
-        return view('posts',[
-            'posts' => $posts
-        ]);
+Auth::routes();
 
-    })->name('show');
-});
+Route::get('/home', 'HomeController@index')->name('home');

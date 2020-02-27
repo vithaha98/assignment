@@ -12,11 +12,12 @@ class PostSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        foreach (range(1, 100) as $value) {
+        foreach (range(1, 20) as $value) {
             \App\Models\posts::create([
                 'title' => $faker->text('20'),
-                'content' => $faker->text('200')
-
+                'content' => $faker->text('200'),
+                'user_id'=> \App\Models\Users::inRandomOrder()->first()->id,
+                'cate_id'=> \App\Models\Catogery::inRandomOrder()->first()->id
             ]);
 
         }

@@ -34,13 +34,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{route('posts.index')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
+                                <p>Bai Dang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('users.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Inactive Page</p>
                             </a>
@@ -55,6 +55,19 @@
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
+                </li>
+                <li class="nav-item">
+
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+
                 </li>
             </ul>
         </nav>

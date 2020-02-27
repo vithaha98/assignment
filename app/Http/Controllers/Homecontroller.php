@@ -1,19 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\posts;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
-class Homecontroller extends BaseController
+class HomeController extends Controller
 {
-    //
-    public function index(){
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
         $posts = posts::paginate(10);
-        return view('index',['posts'=>$posts]);
+        return view('post.index',['posts'=>$posts]);
     }
 }

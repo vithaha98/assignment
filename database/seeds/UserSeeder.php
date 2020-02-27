@@ -13,11 +13,11 @@ class UserSeeder extends Seeder
     {
         //
         $faker = Faker\Factory::create();
-        foreach (range(1, 100) as $value) {
+        foreach (range(1, 10) as $value) {
             \App\Models\Users::create([
                 'name' => $faker->userName,
                 'email' => $faker->email,
-                'password' => bcrypt('anhvit12')
+                'password' => bcrypt('anhvit12'),
             ]);
 
         }
