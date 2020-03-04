@@ -13,9 +13,16 @@
 use App\Models\Posts;
 
 Route ::get('/','Homecontroller@index');
-Route ::get('/admin','Postcontroller@index');
+Route ::get('/admin','AdminController@index')->middleware('adminLogin');
 Route::resource('posts','PostController');
-Route::resource('users','UserController');
+Route::get('users/show', 'UserController@show')->name('users.show');
+Route::resource('users','UserController')->parameters([
+    'users' => 'users?'
+])->except([
+    'show'
+]);
+
+Route::post('comment/{id}', 'PostController@comment')->name('posts.comment');
 
 Auth::routes();
 

@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             \App\Models\Users::create([
                 'name' => $faker->userName,
                 'email' => $faker->email,
+                'dob'=> $faker->date(),
                 'password' => bcrypt('anhvit12'),
             ]);
 

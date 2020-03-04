@@ -34,25 +34,32 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('posts.index')}}" class="nav-link active">
+                            <a href="{{route('posts.index')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Bai Dang</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('users.show')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bài Đăng Của Tôi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                                <p>Thông Tin Tài Khoản</p>
                             </a>
                         </li>
                     </ul>
+
+
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{asset('admin')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
+                            Quản Trị
                         </p>
                     </a>
                 </li>

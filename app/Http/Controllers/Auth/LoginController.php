@@ -5,6 +5,7 @@ use App\Models\Users;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ],
+            [
+                'required' => ':attribute không được để trống',
+                'min' => ':attribute không được dưới :min',
+                'max' => ':attribute không được trên :max',
+            ]);
+    }
+
 }

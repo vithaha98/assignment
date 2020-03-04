@@ -12,9 +12,9 @@ class Commentseeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        foreach (range(1, 500) as $value) {
+        foreach (range(1, 50) as $value) {
             \App\Models\Comment::create([
-                'content' => $faker->text('5'),
+                'content' => $faker->text('200'),
                 'post_id'=> \App\Models\Posts::inRandomOrder()->first()->id,
                 'user_id'=> \App\Models\Users::inRandomOrder()->first()->id
 

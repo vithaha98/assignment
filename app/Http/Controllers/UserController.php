@@ -9,14 +9,19 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     public function index(){
-        $users = Users::paginate(10);
+//        $users = Users::paginate(10);
+        $users = Users::where('id',\Auth::user()->id)->first();
         return view('users.index',['users'=>$users]);
     }
     public function show(){
-        $user = Users::with('posts')->get();
-        dd($user);
-        return redirect()->route('users.show');
+        $posts = posts::where('user_id', \Auth::user()->id)->paginate(10);
+
+        return view('users.show',compact('posts'));
     }
     public function create(){
         return view('users.create');

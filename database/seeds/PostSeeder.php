@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
         foreach (range(1, 20) as $value) {
             \App\Models\posts::create([
                 'title' => $faker->text('20'),
-                'content' => $faker->text('200'),
+                'content' => $faker->text('500'),
                 'user_id'=> \App\Models\Users::inRandomOrder()->first()->id,
                 'cate_id'=> \App\Models\Catogery::inRandomOrder()->first()->id
             ]);

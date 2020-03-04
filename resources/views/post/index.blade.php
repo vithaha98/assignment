@@ -4,8 +4,13 @@
 
     <!-- Content Wrapper. Contains page content -->
 
-        <!-- Main content -->
+    <!-- Main content -->
         <div class="content">
+            <div class="card-header">
+                <h3 class="card-title"><a href="{{route('posts.create')}}" class="card-link">Thêm Bài</a></h3>
+            </div>
+
+
             <div class="container-fluid">
                 <div class="row">
 
@@ -23,7 +28,6 @@
                                         </p>
 
                                         <a href="{{route('posts.show',$post->id)}}" class="card-link">Show</a>
-                                        <a href="{{route('posts.edit',$post->id)}}" class="card-link">Edit</a>
                                     </div>
                                 </div>
 
@@ -33,6 +37,7 @@
                         <p>No Data</p>
                     @endif
                 </div>
+                <div class="row justify-content-center">{{$posts->links()}}</div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->

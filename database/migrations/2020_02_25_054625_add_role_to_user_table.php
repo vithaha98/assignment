@@ -15,7 +15,7 @@ class AddRoleToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->boolean('is_admin')->default(0);
+            $table->boolean('is_admin')->default(config('common.role.user'));
         });
     }
 

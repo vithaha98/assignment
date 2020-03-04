@@ -16,7 +16,7 @@
                     @error('title')
                     <strong style="color: red">{{$message}}</strong>
                     @enderror
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title">
+                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label >Content</label>

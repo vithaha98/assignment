@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Catogery;
+use App\Models\Comment;
 use App\Models\posts;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -11,14 +12,11 @@ use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-    }
+
+
 
     public function index(){
-//        dd(\Auth::user()->id);4
-        $posts = Posts::paginate(20);
+            $posts = Posts::paginate(10);
 //        $posts = posts::where('user_id', \Auth::user()->id)->paginate(10);
         return view('post.index',['posts'=>$posts]);
     }
@@ -29,7 +27,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $posts = Posts::find($id);
+        $posts = Posts::where('id', $id)->with('comment')->first();
+//        dd($posts->comment);
         return view('post.show',compact('posts'));
     }
 
@@ -50,11 +49,21 @@ class PostController extends Controller
         $data = request()->all(['title', 'content','cate_id']);
         $data['user_id'] = \Auth::user()->id;
         $post = Posts::create($data);
-
-
         return redirect()->route('posts.index');
     }
-
+    public function comment(Request $request,$id){
+        $request->validate([
+            'content' => 'required'
+        ],[
+            'required' => 'Comment vào bạn êiiiiiii'
+        ]);
+        $comment = \request()->all('content');
+        $comment['user_id'] = \Auth::user()->id;
+        $comment = new Comment($comment);
+        $post = Posts::find($id);
+        $post->comment()->save($comment);
+        return back();
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -63,10 +72,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+
         $categories = Catogery::all(['id', 'name']);
         $post = Posts::find($id);
-        return view('post.edit', compact('categories','post'));
+        if (\Auth::user()->is_admin === config('common.role.admin') || \Auth::user()->id === $post->user_id  ){
+            return view('post.edit', compact('categories','post'));
+        }
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -80,11 +93,10 @@ class PostController extends Controller
     {
         //
         $post = Posts::find($id);
-        $data = request()->all(['title', 'content','cate_id']);
-        $data['user_id'] = \Auth::user()->id;
-        $post = Posts::create($data);
-
-
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->cate_id = $request->input('cate_id');
+        $post->save();
         return redirect()->route('posts.index');
     }
 

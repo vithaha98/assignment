@@ -16,4 +16,7 @@ class Posts extends Model
     public function cate(){
         return $this->belongsTo(Cates::class,'cate_id');
     }
+    public function comment(){
+        return $this->hasMany(Comment::class,'post_id');
+    }
 }
