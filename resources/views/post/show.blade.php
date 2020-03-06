@@ -31,7 +31,7 @@
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            Nguồn: {{ $posts->user->name }}
+{{--                                            Nguồn: {{ $posts->user->name }}--}}
                                         </div>
                                         <!-- /.card-footer-->
                                     </div>

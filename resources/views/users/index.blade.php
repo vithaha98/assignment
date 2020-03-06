@@ -30,7 +30,7 @@
                                     <td>{{$users->email}}</td>
                                     <td>{{$users->dob}}</td>
                                     <td><a href="{{route('users.show')}}">{{$users->posts()->count()}}</a></td>
-                                    <td></td>
+                                    <td><a href="{{route('users.edit',$users->id)}}">Update</a></td>
                                 </tr>
 
                                 </tbody>

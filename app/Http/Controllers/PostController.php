@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\PostRequest;
 use App\Models\Catogery;
 use App\Models\Comment;
@@ -11,10 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
-
-
-
-
     public function index(){
             $posts = Posts::paginate(10);
 //        $posts = posts::where('user_id', \Auth::user()->id)->paginate(10);
@@ -74,11 +69,10 @@ class PostController extends Controller
     {
 
         $categories = Catogery::all(['id', 'name']);
-        $post = Posts::find($id);
+        $post = Posts::findOrFail($id);
         if (\Auth::user()->is_admin === config('common.role.admin') || \Auth::user()->id === $post->user_id  ){
             return view('post.edit', compact('categories','post'));
         }
-
         return redirect()->route('posts.index');
     }
 
@@ -89,10 +83,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
         //
-        $post = Posts::find($id);
+        $post = Posts::findOrFail($id);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->cate_id = $request->input('cate_id');
@@ -108,8 +102,15 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $delete = DB::table('posts')->where('id','=',$id)->delete();
-        return redirect()->route('posts.index');
+        $post = Posts::findOrFail($id);
+        if (\Auth::user()->is_admin === config('common.role.admin') || \Auth::user()->id === $post->user_id  ){
+            return response([
+                'deleted' => $post->delete()
+            ]);
+        }else{
+            return response('Bạn không có quyền delete', 403);
+        }
+
     }
     public function user(){
         return $this->belongsTo(Users::class);

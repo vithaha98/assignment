@@ -7,16 +7,23 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
+
         <form role="form" method="post" action="{{route('posts.update',$post->id)}}">
             @method('PUT')
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label >Full Name </label>
+                    <label >Title </label>
+                    @error('title')
+                    <strong style="color: red">{{$message}}</strong>
+                    @enderror
                     <input type="text" name="title" class="form-control" id="exampleInputEmail1" value="{{$post->title}}" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label >Content</label>
+                    @error('content')
+                    <strong style="color: red">{{$message}}</strong>
+                    @enderror
                     <textarea  name="content" class="form-control" id="exampleInputPassword1" >{{$post->content}} </textarea>
                 </div>
 

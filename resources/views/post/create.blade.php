@@ -7,7 +7,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" method="POST" action="{{route('posts.store')}}">
+        <form role="form" method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data" ">
             @csrf
 
             <div class="card-body">

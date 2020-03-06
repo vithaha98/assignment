@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('admin.layouts.layouts')
 
 @section('contents')
 
@@ -7,7 +7,7 @@
     <!-- Main content -->
     <div class="content">
         <div class="card-header">
-            <h3 class="card-title"><a href="{{route('posts.create')}}" class="card-link">Thêm Bài</a></h3>
+            <h3 class="card-title"><a href="{{route('admin.posts_create')}}" class="card-link">Thêm Bài</a></h3>
         </div>
 
 
@@ -29,6 +29,7 @@
 
                                     <a href="{{route('posts.show',$post->id)}}" class="card-link">Show</a>
                                     <a href="{{route('posts.edit',$post->id)}}" class="card-link">Edit</a>
+
                                     <button data-delete="{{route('posts.destroy',$post->id)}}" class="card-link delete_post">Delete</button>
                                 </div>
                             </div>
@@ -47,7 +48,6 @@
     <!-- /.content-wrapper -->
 
 @endsection
-
 @push('script')
     <script !src="">
         $(document).ready(function () {
